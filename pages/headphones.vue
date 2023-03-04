@@ -3,9 +3,9 @@
     <div v-for="item in response.data.reverse()" class="group grid grid-cols-1 lg:grid-cols-2 place-items-center mb-28 lg:mb-40 last:mb-0">
       <div class="group-odd:lg:order-2">
         <picture>
-          <source media="(min-width:1024px)" :srcset="`http://localhost:1337${item.attributes.image.desktop.data.attributes.url}`">
-          <source media="(min-width:768px)" :srcset="`http://localhost:1337${item.attributes.image.tablet.data.attributes.url}`">
-          <img class="rounded-lg mb-12" :srcset="`http://localhost:1337${item.attributes.image.mobile.data.attributes.url}`" alt="" />
+          <source media="(min-width:1024px)" :srcset="`http://localhost:1337${item.attributes.categoryImage.desktop.data.attributes.url}`">
+          <source media="(min-width:768px)" :srcset="`http://localhost:1337${item.attributes.categoryImage.tablet.data.attributes.url}`">
+          <img class="rounded-lg mb-12" :srcset="`http://localhost:1337${item.attributes.categoryImage.mobile.data.attributes.url}`" alt="" />
         </picture>
       </div>
       <div class="group-odd:lg:order-1 lg:justify-self-start group-even:lg:justify-self-end max-w-md">
@@ -30,7 +30,7 @@ definePageMeta({
 // find all products
 const { find } = useStrapi()
 // const response = await find('products?populate=*')
-const response = await find('products?filters[category][name][$eq]=headphones&populate[image][populate]=*')
+const response = await find('products?filters[category][name][$eq]=headphones&populate[categoryImage][populate]=*')
 //  products?populate=*
 // products?filters[attributes][category][attributes][name][$eq]=headphones
 // const headphones = response.filter(
