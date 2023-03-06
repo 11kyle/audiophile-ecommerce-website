@@ -3,13 +3,13 @@
     <AppHeader />
     <AppHero />
     <div class="lg:px-6 lg:mx-auto max-w-6xl">
-      <div class="flex flex-col gap-y-32 lg:gap-y-40 mx-6 lg:mx-auto max-w-6xl">
+      <div class="flex flex-col gap-y-28 lg:gap-y-40 lg:px-6 mx-6 lg:mx-auto max-w-6xl">
         <div class="mt-[120px]">
           <CategorySection />
         </div>
         <slot />
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 place-items-center mb-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 place-items-center mb-28">
           <div class="lg:order-2 mb-10">
             <picture>
               <source media="(min-width:1024px)" srcset="../assets/shared/desktop/image-best-gear.jpg">

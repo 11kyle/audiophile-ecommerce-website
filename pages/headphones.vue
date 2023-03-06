@@ -8,10 +8,11 @@
           <img class="rounded-lg mb-12" :srcset="`http://localhost:1337${item.attributes.categoryImage.mobile.data.attributes.url}`" alt="" />
         </picture>
       </div>
-      <div class="group-odd:lg:order-1 lg:justify-self-start group-even:lg:justify-self-end max-w-md">
+      <div class="group-odd:lg:order-1 lg:justify-self-start group-even:lg:justify-self-end flex flex-col items-center lg:items-start max-w-md">
         <h2 class="uppercase font-bold text-4xl tracking-widest text-center lg:text-left mb-8">{{ item.attributes.name }}</h2>
         <p class="font-medium text-base text-center lg:text-left opacity-50 mb-6">{{ item.attributes.description }}</p>
-        <button class="bg-[#D87D4A] uppercase font-bold text-xs tracking-widest text-white w-40 h-12">See Product</button>
+        <!-- <button class="bg-[#D87D4A] uppercase font-bold text-xs tracking-widest text-white w-40 h-12">See Product</button> -->
+        <NuxtLink :to="`/headphones/${item.attributes.slug}`" class="grid place-content-center bg-[#D87D4A] uppercase font-bold text-xs tracking-widest text-white w-40 h-12">See Product</NuxtLink>
       </div>
     </div>
   </section>
