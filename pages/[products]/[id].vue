@@ -13,12 +13,15 @@
         <div class="md:justify-self-end md:max-w-[340px]">
           <h2 class="uppercase font-bold text-4xl tracking-widest mb-8">{{ product.attributes.name }}</h2>
           <p class="font-medium text-base opacity-50 mb-6">{{ product.attributes.description }}</p>
-          <p>${{ product.attributes.price }}</p>
-          <button class="bg-[#D87D4A] uppercase font-bold text-xs tracking-widest text-white w-40 h-12">See Product</button>
+          <p class="font-bold text-lg mb-6">$ {{ product.attributes.price }}</p>
+          <div class="flex gap-x-4">
+            <Counter />
+            <button class="bg-[#D87D4A] uppercase font-bold text-xs tracking-widest text-white w-40 h-12">Add to cart</button>
+          </div>
         </div>
       </div>
 
-      <div class="lg:flex lg:gap-x-32">
+      <div class="lg:flex lg:gap-x-32 mb-28 lg:mb-40">
         <div class="lg:basis-2/3 mb-20 lg:mb-0">
           <h2 class="uppercase font-bold text-2xl lg:text-3xl mb-6 md:mb-8">Features</h2>
           <p class="font-medium text-base opacity-50">{{ product.attributes.features }}</p>
@@ -36,14 +39,36 @@
           </ul>
         </div>
       </div>
+
+      <!-- 57.246377 -->
+      <!-- 40.144928 -->
+
+      <div class="grid md:grid-cols-7 md:grid-flow-row gap-[20px]">
+        <div class="md:col-start-1 md:col-span-3">
+          <picture>
+            <source media="(min-width:1024px)" :srcset="`http://localhost:1337${product.attributes.gallery.first.desktop.data.attributes.url}`">
+            <source media="(min-width:768px)" :srcset="`http://localhost:1337${product.attributes.gallery.first.tablet.data.attributes.url}`">
+            <img class="rounded-lg" :srcset="`http://localhost:1337${product.attributes.gallery.first.mobile.data.attributes.url}`" alt="" />
+          </picture>
+        </div>
+        <div class="md:order-3 md:col-span-3">
+          <picture>
+            <source media="(min-width:1024px)" :srcset="`http://localhost:1337${product.attributes.gallery.second.desktop.data.attributes.url}`">
+            <source media="(min-width:768px)" :srcset="`http://localhost:1337${product.attributes.gallery.second.tablet.data.attributes.url}`">
+            <img class="rounded-lg" :srcset="`http://localhost:1337${product.attributes.gallery.second.mobile.data.attributes.url}`" alt="" />
+          </picture>
+        </div>
+        <div class="md:order-2 md:col-start-4 md:col-span-4 md:row-span-2">
+          <picture>
+            <source media="(min-width:1024px)" :srcset="`http://localhost:1337${product.attributes.gallery.third.desktop.data.attributes.url}`">
+            <source media="(min-width:768px)" :srcset="`http://localhost:1337${product.attributes.gallery.third.tablet.data.attributes.url}`">
+            <img class="rounded-lg object-fill h-full" :srcset="`http://localhost:1337${product.attributes.gallery.third.mobile.data.attributes.url}`" alt="" />
+          </picture>
+        </div>
+      </div>
+
     </div>
-    <!-- <div class="lg:gird lg:grid-rows-2">
-      <picture>
-        <source media="(min-width:1024px)" :srcset="`http://localhost:1337${product.attributes.gallery.first.desktop.data.attributes.url}`">
-        <source media="(min-width:768px)" :srcset="`http://localhost:1337${product.attributes.gallery.first.tablet.data.attributes.url}`">
-        <img class="rounded-lg mb-12" :srcset="`http://localhost:1337${product.attributes.gallery.first.mobile.data.attributes.url}`" alt="" />
-      </picture>
-    </div> -->
+    
   </section>
 </template>
 
@@ -52,17 +77,76 @@ definePageMeta({
   layout: "product-details",
 })
 
-// {{ $router.currentRoute.value.path.slice(1) }}
-
 const route = useRoute()
-const id = route.params.id
-
-console.log(id)
 
 // find all products
-const { find } = useStrapi()
+// const { find } = useStrapi()
 // const response = await find('products?populate=*')
-const response = await find(`products?filters[slug][$eq]=${id}&populate[image][populate]=*`)
+// const response = await find(`products?filters[slug][$eq]=${id}&populate[image][populate]=*`)
+
+// console.log(response)
+
+// find one product
+const { findOne } = useStrapi4()
+
+// const { data, pending, refresh, error } = await useAsyncData(
+//   'product',
+//   () => findOne('products', {
+//     populate: {
+//       image: {
+//         populate: '*'
+//       },
+//       gallery: {
+//         populate: {
+//           first: {
+//             populate: '*'
+//           },
+//           second: {
+//             populate: '*'
+//           },
+//           third: {
+//             populate: '*'
+//           }
+//         }
+//       }
+//     },
+//     filters: { 
+//       slug: { 
+//         $eq: route.params.id 
+//       }
+//     }
+//   })
+// )
+
+// console.log(data)
+
+const response = await findOne('products', {
+  populate: {
+    image: {
+      populate: '*'
+    },
+    gallery: {
+      populate: {
+        first: {
+          populate: '*'
+        },
+        second: {
+          populate: '*'
+        },
+        third: {
+          populate: '*'
+        }
+      }
+    }
+  },
+  filters: { 
+    slug: { 
+      $eq: route.params.id 
+    }
+  }
+})
+
+// localStorage.setItem('product', JSON.stringify(response))
 
 console.log(response)
 </script>

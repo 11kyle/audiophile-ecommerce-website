@@ -19,31 +19,63 @@
 </template>
 
 <script setup>
+import { toRaw } from 'vue';
+import { useProductStore } from '~/store/products'
+
 definePageMeta({
   layout: "category",
 })
 
-// loop through images and use image with name including mobile and product
-// image in item.attributes.image
-// image.attributes.name.includes("product")
-// url
-
-// find all products
-const { find } = useStrapi()
-// const response = await find('products?populate=*')
-const response = await find('products?filters[category][name][$eq]=headphones&populate[categoryImage][populate]=*')
-//  products?populate=*
-// products?filters[attributes][category][attributes][name][$eq]=headphones
-// const headphones = response.filter(
-//   (el) => el.attributes.category.data.attributes.name === 'headphones'
+// const { data, pending, refresh, error } = await useAsyncData(
+//   'products', 
+//   () => find('products?filters[category][name][$eq]=headphones&populate[categoryImage][populate]=*')
 // )
 
-console.log(response)
-// console.log(headphones)
+// const { data, pending, refresh, error } = await useAsyncData(
+//   'product',
+//   () => findOne('products', {
+//     populate: {
+//       image: {
+//         populate: '*'
+//       },
+//       gallery: {
+//         populate: {
+//           first: {
+//             populate: '*'
+//           },
+//           second: {
+//             populate: '*'
+//           },
+//           third: {
+//             populate: '*'
+//           }
+//         }
+//       }
+//     },
+//     filters: { 
+//       slug: { 
+//         $eq: route.params.id 
+//       }
+//     }
+//   })
+// )
 
-// find one product
-// const { findOne } = useStrapi()
-// const response2 = await findOne('products', 1)
+// console.log(data)
 
-// console.log(response2)
+// find all products
+const { find } = useStrapi4()
+// const response = await find('products?populate=*')
+const response = await find('products?filters[category][name][$eq]=headphones&populate[categoryImage][populate]=*')
+
+// const store = useProductStore()
+// if (store.getHeadphones.length < 1) {
+//   // store.$patch((state) => {
+//   //   state.headphones.concat(response.data)
+//   //   state.hasChanged = true
+//   // })
+//   store.$patch({ headphones: response.data })
+// }
+
+console.log(response.data)
+// console.log(toRaw(store.getHeadphones))
 </script>

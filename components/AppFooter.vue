@@ -16,7 +16,7 @@
         </p>
       </div>
       <div class="lg:order-2 text-center md:text-left mt-12 md:mt-20 lg:mt-14">
-        <p class="font-bold text-base text-white opacity-50">Copyright 2021. All Rights Reserved</p>
+        <p class="font-bold text-base text-white opacity-50">Copyright {{ year }}. All Rights Reserved</p>
       </div>
       <div class="lg:order-1 flex justify-center md:justify-end lg:items-end gap-x-4 mt-12 mb-10 md:mt-20 md:mb-0 lg:mt-0">
         <a href="#"><img src="../assets/shared/desktop/icon-facebook.svg" alt="Facebook" /></a>
@@ -26,3 +26,7 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+const year = new Date().getFullYear()
+</script>

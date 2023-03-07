@@ -24,33 +24,19 @@
 </template>
 
 <script setup>
-import { useStrapi } from '~~/.nuxt/imports';
-
 definePageMeta({
   layout: "category",
 })
 
-// loop through images and use image with name including mobile and product
-// image in item.attributes.image
-// image.attributes.name.includes("product")
-// url
-
 // find all products
-const { find } = useStrapi()
+const { find } = useStrapi4()
 // const response = await find('products?populate=*')
 const response = await find('products?filters[category][name][$eq]=speakers&populate[categoryImage][populate]=*')
-//  products?populate=*
+// products?populate=*
 // products?filters[attributes][category][attributes][name][$eq]=headphones
 // const headphones = response.filter(
 //   (el) => el.attributes.category.data.attributes.name === 'headphones'
 // )
 
 console.log(response)
-// console.log(headphones)
-
-// find one product
-// const { findOne } = useStrapi()
-// const response2 = await findOne('products', 1)
-
-// console.log(response2)
 </script>

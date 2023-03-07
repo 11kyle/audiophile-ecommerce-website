@@ -1,3 +1,27 @@
+import { defineStore } from 'pinia'
+
+export const useProductStore = defineStore('product-store', {
+  state: () => {
+    return {
+      products: [],
+      headphones: [],
+      earphones: [],
+      speakers: []
+    }
+  },
+  actions: {
+    addProducts(value) {
+      this.products.push(value)
+    }
+  },
+  getters: {
+    getProducts: (state) => state.products,
+    getHeadphones: (state) => state.headphones,
+    getEarphones: (state) => state.earphones,
+    getSpeakers: (state) => state.speakers
+  }
+})
+
 export const state = () => ({
   allProducts: [],
   featuredProducts: [],
@@ -26,15 +50,4 @@ export const actions = {
   async deleteCartItem({ commit }, id) {
     await commit('removeCartItem', id)
   },
-}
-
-export const mutations = {
-  setProducts: (state, products) => (state.allProducts = products),
-  setFeaturedProducts: (state, products) => (state.featuredProducts = products),
-  setNewProducts: (state, products) => (state.newProducts = products),
-  setCartItem: (state, item) => state.cartItems.push(item),
-  removeCartItem: (state, id) =>
-    state.cartItems.splice(
-      state.cartItems.findIndex((el) => el.id === id), 1
-    ),
 }
