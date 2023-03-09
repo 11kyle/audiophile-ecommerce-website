@@ -64,9 +64,9 @@ definePageMeta({
   layout: 'default'
 })
 useHead({
-  title: '',
+  title: 'Audiophile',
   bodyAttrs: {
-    class: 'bg-[#F1F1F1]'
+    class: 'bg-[#FAFAFA]'
   }
 })
 </script>

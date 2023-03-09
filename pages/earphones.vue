@@ -33,9 +33,9 @@ definePageMeta({
 })
 
 useHead({
-  title: '',
+  title: 'Audiophile - Earphones',
   bodyAttrs: {
-    class: 'bg-[#F1F1F1]'
+    class: 'bg-[#FAFAFA]'
   }
 })
 

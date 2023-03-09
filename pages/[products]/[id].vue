@@ -82,18 +82,20 @@ import {
   shallowReadonly 
 } from 'vue';
 
+const route = useRoute()
+
 definePageMeta({
   layout: "product-details",
 })
 
 useHead({
-  title: '',
+  title: `Audiophile - ${route.params.id}`,
   bodyAttrs: {
-    class: 'bg-[#F1F1F1]'
+    class: 'bg-[#FAFAFA]'
   }
 })
 
-const route = useRoute()
+
 
 // find one product
 const { find, findOne } = useStrapi4()
