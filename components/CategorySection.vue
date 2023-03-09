@@ -5,12 +5,12 @@
       imgSrc="../assets/shared/desktop/image-category-thumbnail-headphones.png"
     />
     <CategoryCard 
-      title="earphones"
-      imgSrc="../assets/shared/desktop/image-category-thumbnail-speakers.png"
-    />
-    <CategoryCard 
       title="speakers"
       imgSrc="require('@/assets/shared/desktop/image-category-thumbnail-earphones.png')"
+    />
+    <CategoryCard 
+      title="earphones"
+      imgSrc="../assets/shared/desktop/image-category-thumbnail-speakers.png"
     />
   </div>
 </template>

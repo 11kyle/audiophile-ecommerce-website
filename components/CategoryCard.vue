@@ -13,12 +13,18 @@
     </div>
     <!-- Shop -->
     <div class="mt-4">
-      <button class="flex items-center gap-x-3 mx-auto">
+      <NuxtLink :to="`/${title.toLowerCase()}`" class="flex items-center justify-center gap-x-3">
         <span class="uppercase font-bold text-sm tracking-wide opacity-50">Shop</span>
         <span>
           <img src="../assets/shared/desktop/icon-arrow-right.svg" alt="Right arrow" />
         </span>
-      </button>
+      </NuxtLink>
+      <!-- <button class="flex items-center gap-x-3 mx-auto">
+        <span class="uppercase font-bold text-sm tracking-wide opacity-50">Shop</span>
+        <span>
+          <img src="../assets/shared/desktop/icon-arrow-right.svg" alt="Right arrow" />
+        </span>
+      </button> -->
     </div>
   </div>
 </template>

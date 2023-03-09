@@ -1,7 +1,9 @@
-<template v-if="response">
+<template v-if="productReadonly">
   <section class="grid place-content-center mt-16 md:mt-20 lg:mt-40">
 
-    <div v-for="product in response.data">
+    <!-- add pending component -->
+
+    <div v-for="product in productReadonly.data">
       <div class="grid grid-cols-1 md:grid-cols-2 place-items-center mb-28 lg:mb-40">
         <div class="md:justify-self-start">
           <picture>
@@ -73,80 +75,95 @@
 </template>
 
 <script setup>
+import { 
+  ref, 
+  reactive, 
+  readonly, 
+  shallowReadonly 
+} from 'vue';
+
 definePageMeta({
   layout: "product-details",
 })
 
-const route = useRoute()
-
-// find all products
-// const { find } = useStrapi()
-// const response = await find('products?populate=*')
-// const response = await find(`products?filters[slug][$eq]=${id}&populate[image][populate]=*`)
-
-// console.log(response)
-
-// find one product
-const { findOne } = useStrapi4()
-
-// const { data, pending, refresh, error } = await useAsyncData(
-//   'product',
-//   () => findOne('products', {
-//     populate: {
-//       image: {
-//         populate: '*'
-//       },
-//       gallery: {
-//         populate: {
-//           first: {
-//             populate: '*'
-//           },
-//           second: {
-//             populate: '*'
-//           },
-//           third: {
-//             populate: '*'
-//           }
-//         }
-//       }
-//     },
-//     filters: { 
-//       slug: { 
-//         $eq: route.params.id 
-//       }
-//     }
-//   })
-// )
-
-// console.log(data)
-
-const response = await findOne('products', {
-  populate: {
-    image: {
-      populate: '*'
-    },
-    gallery: {
-      populate: {
-        first: {
-          populate: '*'
-        },
-        second: {
-          populate: '*'
-        },
-        third: {
-          populate: '*'
-        }
-      }
-    }
-  },
-  filters: { 
-    slug: { 
-      $eq: route.params.id 
-    }
+useHead({
+  title: '',
+  bodyAttrs: {
+    class: 'bg-[#F1F1F1]'
   }
 })
 
-// localStorage.setItem('product', JSON.stringify(response))
+const route = useRoute()
 
-console.log(response)
+// find one product
+const { find, findOne } = useStrapi4()
+
+const { data, pending, refresh, error } = await useAsyncData(
+  'products',
+  () => find('products', {
+    populate: {
+      image: {
+        populate: '*'
+      },
+      gallery: {
+        populate: {
+          first: {
+            populate: '*'
+          },
+          second: {
+            populate: '*'
+          },
+          third: {
+            populate: '*'
+          }
+        }
+      }
+    },
+    filters: { 
+      slug: { 
+        $eq: route.params.id 
+      }
+    }
+  })
+)
+
+// console.log(reactive(data).value.data[0])
+// const product = reactive(data).value.data
+// console.log(product)
+// const product = shallowReactive(data).value
+// console.log(product)
+const productReadonly = readonly(data).value
+console.log(productReadonly)
+// const productShallowReadonly = shallowReadonly(data).value
+// console.log(productReadonly)
+
+// const response = await find('products', {
+//   populate: {
+//     image: {
+//       populate: '*'
+//     },
+//     gallery: {
+//       populate: {
+//         first: {
+//           populate: '*'
+//         },
+//         second: {
+//           populate: '*'
+//         },
+//         third: {
+//           populate: '*'
+//         }
+//       }
+//     }
+//   },
+//   filters: { 
+//     slug: { 
+//       $eq: route.params.id 
+//     }
+//   }
+// })
+
+// console.log(response)
+
+// localStorage.setItem('product', JSON.stringify(response))
 </script>
