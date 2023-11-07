@@ -1,22 +1,8 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 import prisma from "@/utils/prisma"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import Filter from "@/components/Filter"
+import Link from "next/link"
 
 const breadcrumbs = [{ id: 1, name: "Men", href: "#" }]
 
@@ -82,13 +68,13 @@ export default async function Page({
                     </div>
                     <div className="flex flex-1 flex-col space-y-2 p-4">
                       <h3 className="text-sm font-medium text-gray-900">
-                        <a href={`/${params.category}/${product.slug}`}>
+                        <Link href={`/${params.category}/${product.slug}`}>
                           <span
                             aria-hidden="true"
                             className="absolute inset-0"
                           />
                           {product.name}
-                        </a>
+                        </Link>
                       </h3>
                       <p className="text-sm text-gray-500">
                         {product.description}
@@ -105,7 +91,6 @@ export default async function Page({
             </section>
           </div>
         </main>
-
         <Footer />
       </div>
     </div>
